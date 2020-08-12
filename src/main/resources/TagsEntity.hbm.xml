@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.paul.attendance.entity.TagsEntity" table="Tags" schema="attendanceDB">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="tag">
+            <column name="tag" sql-type="enum('я', 'н', 'в', 'рв', 'б', 'к', 'от', 'до', 'хд', 'у', 'ож')"/>
+        </property>
+        <set name="daysById" inverse="true">
+            <key>
+                <column name="tag"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.paul.attendance.entity.DaysEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

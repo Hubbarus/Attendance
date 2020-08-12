@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.paul.attendance.entity.DaysEntity" table="Days" schema="attendanceDB">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="date">
+            <column name="date" sql-type="date"/>
+        </property>
+        <many-to-one name="workersByWorker" class="com.paul.attendance.entity.WorkersEntity">
+            <column name="worker"/>
+        </many-to-one>
+        <many-to-one name="tagsByTag" class="com.paul.attendance.entity.TagsEntity">
+            <column name="tag"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
