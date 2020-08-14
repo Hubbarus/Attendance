@@ -9,7 +9,7 @@
             <column name="id" sql-type="int(11)"/>
         </id>
         <property name="tag">
-            <column name="tag" sql-type="enum('я', 'н', 'в', 'рв', 'б', 'к', 'от', 'до', 'хд', 'у', 'ож')"/>
+            <column name="tag" sql-type="text"/>
         </property>
         <set name="daysById" inverse="true">
             <key>

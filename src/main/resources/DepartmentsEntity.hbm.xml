@@ -13,7 +13,7 @@
         </property>
         <set name="workersById" inverse="true">
             <key>
-                <column name="department_id"/>
+                <column name="department"/>
             </key>
             <one-to-many not-found="ignore" class="com.paul.attendance.entity.WorkersEntity"/>
         </set>

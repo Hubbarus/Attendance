@@ -15,10 +15,10 @@ public class WorkersEntity {
     private Date birth;
     private int age;
     private String profession;
-    private byte remote;
+    private boolean remote;
     private String address;
     private Collection<DaysEntity> daysById;
-    private DepartmentsEntity departmentsByDepartmentId;
+    private DepartmentsEntity departmentsByDepartment;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -92,11 +92,11 @@ public class WorkersEntity {
 
     @Basic
     @Column(name = "remote", nullable = false)
-    public byte getRemote() {
+    public boolean getRemote() {
         return remote;
     }
 
-    public void setRemote(byte remote) {
+    public void setRemote(boolean remote) {
         this.remote = remote;
     }
 
@@ -110,27 +110,38 @@ public class WorkersEntity {
         this.address = address;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         WorkersEntity that = (WorkersEntity) o;
-        return id == that.id &&
-                age == that.age &&
-                remote == that.remote &&
-                Objects.equals(photo, that.photo) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(surname, that.surname) &&
-                Objects.equals(birth, that.birth) &&
-                Objects.equals(profession, that.profession) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(daysById, that.daysById) &&
-                Objects.equals(departmentsByDepartmentId, that.departmentsByDepartmentId);
+
+        if (id != that.id) return false;
+        if (age != that.age) return false;
+        if (remote != that.remote) return false;
+        if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
+        if (birth != null ? !birth.equals(that.birth) : that.birth != null) return false;
+        if (profession != null ? !profession.equals(that.profession) : that.profession != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, photo, name, surname, birth, age, profession, remote, address, daysById, departmentsByDepartmentId);
+        int result = id;
+        result = 31 * result + (photo != null ? photo.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (birth != null ? birth.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + (profession != null ? profession.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
     }
 
     @OneToMany(mappedBy = "workersByWorker")
@@ -143,12 +154,12 @@ public class WorkersEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
-    public DepartmentsEntity getDepartmentsByDepartmentId() {
-        return departmentsByDepartmentId;
+    @JoinColumn(name = "department", referencedColumnName = "id", nullable = false)
+    public DepartmentsEntity getDepartmentsByDepartment() {
+        return departmentsByDepartment;
     }
 
-    public void setDepartmentsByDepartmentId(DepartmentsEntity departmentsByDepartmentId) {
-        this.departmentsByDepartmentId = departmentsByDepartmentId;
+    public void setDepartmentsByDepartment(DepartmentsEntity departmentsByDepartment) {
+        this.departmentsByDepartment = departmentsByDepartment;
     }
 }

@@ -35,18 +35,23 @@ public class DepartmentsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         DepartmentsEntity that = (DepartmentsEntity) o;
-        return id == that.id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(workersById, that.workersById);
+
+        if (id != that.id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, workersById);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
-    @OneToMany(mappedBy = "departmentsByDepartmentId")
+    @OneToMany(mappedBy = "departmentsByDepartment")
     public Collection<WorkersEntity> getWorkersById() {
         return workersById;
     }

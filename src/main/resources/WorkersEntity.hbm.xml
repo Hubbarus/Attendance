@@ -32,8 +32,8 @@
         <property name="address">
             <column name="address" sql-type="text"/>
         </property>
-        <many-to-one name="departmentsByDepartmentId" class="com.paul.attendance.entity.DepartmentsEntity">
-            <column name="department_id"/>
+        <many-to-one name="departmentsByDepartment" class="com.paul.attendance.entity.DepartmentsEntity">
+            <column name="department"/>
         </many-to-one>
         <set name="daysById" inverse="true">
             <key>

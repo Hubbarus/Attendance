@@ -32,22 +32,26 @@ public class DaysEntity {
         this.date = date;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         DaysEntity that = (DaysEntity) o;
-        return id == that.id &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(workersByWorker, that.workersByWorker) &&
-                Objects.equals(tagsByTag, that.tagsByTag);
+
+        if (id != that.id) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, workersByWorker, tagsByTag);
+        int result = id;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
-
     @ManyToOne
     @JoinColumn(name = "worker", referencedColumnName = "id", nullable = false)
     public WorkersEntity getWorkersByWorker() {

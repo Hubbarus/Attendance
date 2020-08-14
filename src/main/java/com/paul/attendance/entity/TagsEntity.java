@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "Tags", schema = "attendanceDB", catalog = "")
 public class TagsEntity {
     private int id;
-    private TagsType tag;
+    private String tag;
     private Collection<DaysEntity> daysById;
 
     @Id
@@ -23,11 +23,11 @@ public class TagsEntity {
 
     @Basic
     @Column(name = "tag", nullable = false)
-    public TagsType getTag() {
+    public String getTag() {
         return tag;
     }
 
-    public void setTag(TagsType tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 
@@ -35,15 +35,20 @@ public class TagsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         TagsEntity that = (TagsEntity) o;
-        return id == that.id &&
-                tag == that.tag &&
-                Objects.equals(daysById, that.daysById);
+
+        if (id != that.id) return false;
+        if (tag != null ? !tag.equals(that.tag) : that.tag != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tag, daysById);
+        int result = id;
+        result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        return result;
     }
 
     @OneToMany(mappedBy = "tagsByTag")

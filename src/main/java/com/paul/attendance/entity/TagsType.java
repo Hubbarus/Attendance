@@ -10,9 +10,16 @@ public enum TagsType {
     PAID_VACATION("ОТ"),
     NOT_PAID_VACATION("До"),
     CLEANING_DAY("Хд"),
-    STUDING_VACATION("У"),
+    STUDYING_VACATION("У"),
     CHILD_VACATION("Ож");
 
+    private final String code;
+
     TagsType(String s) {
+        this.code = s;
+    }
+
+    public String getCode() {
+        return code;
     }
 }
