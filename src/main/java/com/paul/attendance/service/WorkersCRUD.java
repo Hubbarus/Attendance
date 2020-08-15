@@ -2,9 +2,12 @@ package com.paul.attendance.service;
 
 import com.paul.attendance.entity.WorkersEntity;
 import org.hibernate.Session;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class WorkersCRUD {
 
     public void save(WorkersEntity workers) {

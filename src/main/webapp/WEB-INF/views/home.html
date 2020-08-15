@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5 mb-5" align="center">
+    <h1>Enter your URL to be shortened.</h1>
+    <form action="/" method="post">
+        <input type="text" name="userUrl" placeholder="your URL" class="form-control" size="10"><br>
+        <button type="submit" class="btn btn-success">Make It Short!</button>
+    </form>
+</div>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+<div th:fragment = "dpts" th:each = "el : ${departments}" class="alert alert-info mt-2">
+    <a th:href="@{'dpt?id=' + ${el.id}}"><h3 th:text = "${el.name}"></h3></a>
+</div>

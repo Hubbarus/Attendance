@@ -2,9 +2,11 @@ package com.paul.attendance.service;
 
 import com.paul.attendance.entity.DepartmentsEntity;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DepartmentsCRUD {
 
     public void save(DepartmentsEntity department) {
@@ -21,6 +23,12 @@ public class DepartmentsCRUD {
         session.delete(department);
         session.flush();
         session.close();
+    }
+
+    public DepartmentsEntity getById(Integer id) {
+        Session session = HibernateUtil.getSession();
+        DepartmentsEntity department = session.get(DepartmentsEntity.class, id);
+        return department;
     }
 
     public List<DepartmentsEntity> getAll(){

@@ -16,11 +16,10 @@ public class DaysCRUD {
         session.close();
     }
 
-    public List<DaysEntity> getAll(){
+    public List<DaysEntity> getAll() {
         Session session = HibernateUtil.getSession();
         return session.createCriteria(DaysEntity.class).list();
     }
-
 
     public DaysEntity getByDate(String str) {
         Date date = Date.valueOf(str);
@@ -32,7 +31,10 @@ public class DaysCRUD {
                 resultEntity = entity;
             }
         }
-
         return resultEntity;
     }
 }
+/**TODO
+ * Update Method
+ * Change Workers/Days dependency (OneToMane -> ManyToMany) OR NOT? Look at the sheet!
+ */

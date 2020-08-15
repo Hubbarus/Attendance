@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<div>
+    <table>
+        <tr>
+            <th>Department</th>
+            <th>Attendance List</th>
+        </tr>
+        <tr>
+            <th>
+                <div th:insert = "blocks/dpts :: dpts"></div>
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </table>
+
+</div>
+
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+</html>
