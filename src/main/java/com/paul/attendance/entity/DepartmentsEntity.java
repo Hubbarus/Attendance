@@ -2,14 +2,13 @@ package com.paul.attendance.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Departments", schema = "attendanceDB", catalog = "")
 public class DepartmentsEntity {
     private int id;
     private String name;
-    private Collection<WorkersEntity> workersById;
+    private Collection<EmployeeEntity> employeesById;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -52,11 +51,11 @@ public class DepartmentsEntity {
     }
 
     @OneToMany(mappedBy = "departmentsByDepartment")
-    public Collection<WorkersEntity> getWorkersById() {
-        return workersById;
+    public Collection<EmployeeEntity> getEmployeesById() {
+        return employeesById;
     }
 
-    public void setWorkersById(Collection<WorkersEntity> workersById) {
-        this.workersById = workersById;
+    public void setEmployeesById(Collection<EmployeeEntity> workersById) {
+        this.employeesById = workersById;
     }
 }

@@ -4,18 +4,18 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.paul.attendance.entity.TagsEntity" table="Tags" schema="attendanceDB">
+    <class name="com.paul.attendance.entity.ScheduleEntity" table="Schedule" schema="attendanceDB">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
         </id>
+        <property name="date">
+            <column name="date" sql-type="date"/>
+        </property>
         <property name="tag">
             <column name="tag" sql-type="text"/>
         </property>
-        <set name="daysById" inverse="true">
-            <key>
-                <column name="tag"/>
-            </key>
-            <one-to-many not-found="ignore" class="com.paul.attendance.entity.DaysEntity"/>
-        </set>
+        <many-to-one name="employeeByEmployee" class="com.paul.attendance.entity.EmployeeEntity">
+            <column name="employee"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.paul.attendance.entity.WorkersEntity" table="Workers" schema="attendanceDB">
+    <class name="com.paul.attendance.entity.EmployeeEntity" table="Employee" schema="attendanceDB">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
         </id>
@@ -35,11 +35,5 @@
         <many-to-one name="departmentsByDepartment" class="com.paul.attendance.entity.DepartmentsEntity">
             <column name="department"/>
         </many-to-one>
-        <set name="daysById" inverse="true">
-            <key>
-                <column name="worker"/>
-            </key>
-            <one-to-many not-found="ignore" class="com.paul.attendance.entity.DaysEntity"/>
-        </set>
     </class>
 </hibernate-mapping>

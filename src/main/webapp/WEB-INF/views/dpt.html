@@ -10,7 +10,7 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div>
-    <table>
+    <table border="1">
         <tr>
             <th>Department</th>
             <th>Attendance List</th>
@@ -20,7 +20,24 @@
                 <div th:insert = "blocks/dpts :: dpts"></div>
             </th>
             <th>
-                <div th:insert = "blocks/workers :: workers"></div>
+                <table border="1">
+                    <tr>
+                        <th>
+                            <a>Dates | Names</a><br>
+                        </th>
+                        <th th:each="el : ${cols}">
+                            <a th:text="${el.date}"></a>
+                        </th>
+                    </tr>
+                    <tr th:each="el : ${employees}">
+                        <th>
+                            <a th:text="${el}"></a>
+                        </th>
+                        <th th:each="el : ${cols}">
+                            <a th:text="${el.tag}"></a>
+                        </th>
+                    </tr>
+                </table>
             </th>
         </tr>
     </table>

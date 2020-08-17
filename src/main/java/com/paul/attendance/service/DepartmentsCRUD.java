@@ -25,6 +25,15 @@ public class DepartmentsCRUD {
         session.close();
     }
 
+
+    public void update(DepartmentsEntity department) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(department);
+        session.flush();
+        session.close();
+    }
+
     public DepartmentsEntity getById(Integer id) {
         Session session = HibernateUtil.getSession();
         DepartmentsEntity department = session.get(DepartmentsEntity.class, id);
@@ -37,7 +46,6 @@ public class DepartmentsCRUD {
     }
 
     public DepartmentsEntity getByName(String name) throws IllegalArgumentException {
-        Session session = HibernateUtil.getSession();
         List<DepartmentsEntity> list = getAll();
 
         DepartmentsEntity resultEntity = null;

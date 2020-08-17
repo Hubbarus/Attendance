@@ -6,14 +6,14 @@ import org.hibernate.Session;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public abstract class FillerUtil {
 
-    private static WorkersCRUD workersCrud = new WorkersCRUD();
+    private static EmployeeCRUD employeeCrud = new EmployeeCRUD();
     private static DepartmentsCRUD departmentsCrud = new DepartmentsCRUD();
-    private static DaysCRUD daysCRUD = new DaysCRUD();
-
-    public static void fillOneMonth() {
+    private static ScheduleCRUD scheduleCRUD = new ScheduleCRUD();
+    /*public static void fillOneMonth() {
         if (!isFilled()) {
             List<DaysEntity> listOfDaysInDb = daysCRUD.getAll();
 
@@ -45,24 +45,11 @@ public abstract class FillerUtil {
         List<DaysEntity> listOfDaysInDb = daysCRUD.getAll();
         return !(listOfDaysInDb.size() < 31);
     }
+*/
 
-    public static void fillWithTags() {
-        Session session;
+    public static void addEmployees() {
 
-        for (int i = 0; i < TagsType.values().length; i++) {
-            session = HibernateUtil.getSession();
-            session.beginTransaction();
-            TagsEntity entity = new TagsEntity();
-            entity.setTag(TagsType.values()[i].getCode());
-            session.save(entity);
-            session.flush();
-            session.close();
-        }
-    }
-
-    public static void addWorkers() {
-
-        WorkersEntity w1 = new WorkersEntity();
+        EmployeeEntity w1 = new EmployeeEntity();
         w1.setName("Vladimir");
         w1.setSurname("Kashin");
         w1.setBirth(Date.valueOf("1982-08-01"));
@@ -73,7 +60,7 @@ public abstract class FillerUtil {
         w1.setPhoto("photo7.jpg");
         w1.setDepartmentsByDepartment(departmentsCrud.getByName("HR"));
 
-        WorkersEntity w2 = new WorkersEntity();
+        EmployeeEntity w2 = new EmployeeEntity();
         w2.setName("Eugeniy");
         w2.setSurname("Romanov");
         w2.setBirth(Date.valueOf("1984-07-22"));
@@ -84,8 +71,8 @@ public abstract class FillerUtil {
         w2.setPhoto("photo99.jpg");
         w2.setDepartmentsByDepartment(departmentsCrud.getByName("Bookkeeping"));
 
-        workersCrud.save(w1);
-        workersCrud.save(w2);
+        employeeCrud.save(w1);
+        employeeCrud.save(w2);
     }
 
     public static void addDepartments() {
@@ -99,8 +86,27 @@ public abstract class FillerUtil {
     }
 
     public static void fillSchedule() {
-        /**TODO
-         * with update Crud method, update - add workers and tags date by date
-          */
+        List<EmployeeEntity> employeeEntities = employeeCrud.getAll();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(Date.valueOf("2020-01-01"));
+
+        Calendar tmp = Calendar.getInstance();
+        tmp.setTime(Date.valueOf("2021-01-01"));
+
+        for (int i = 0; i < employeeEntities.size(); i++) {
+            EmployeeEntity currentEmployee = employeeEntities.get(i);
+
+            while (cal.before(tmp)) {
+                ScheduleEntity entity = new ScheduleEntity();
+                Date date = new Date(cal.getTime().getTime());
+                entity.setDate(date);
+                entity.setEmployeeByEmployee(currentEmployee);
+                entity.setTag(TagsType.DAY_OFF.getCode());
+                scheduleCRUD.save(entity);
+                cal.add(Calendar.DATE, 1);
+            }
+
+            cal.setTime(Date.valueOf("2020-01-01"));
+        }
     }
 }

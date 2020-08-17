@@ -2,12 +2,10 @@ package com.paul.attendance.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Collection;
-import java.util.Objects;
 
 @Entity
-@Table(name = "Workers", schema = "attendanceDB", catalog = "")
-public class WorkersEntity {
+@Table(name = "Employee", schema = "attendanceDB", catalog = "")
+public class EmployeeEntity {
     private int id;
     private String photo;
     private String name;
@@ -17,7 +15,6 @@ public class WorkersEntity {
     private String profession;
     private boolean remote;
     private String address;
-    private Collection<DaysEntity> daysById;
     private DepartmentsEntity departmentsByDepartment;
 
     @Id
@@ -110,13 +107,12 @@ public class WorkersEntity {
         this.address = address;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        WorkersEntity that = (WorkersEntity) o;
+        EmployeeEntity that = (EmployeeEntity) o;
 
         if (id != that.id) return false;
         if (age != that.age) return false;
@@ -144,13 +140,10 @@ public class WorkersEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "workersByWorker")
-    public Collection<DaysEntity> getDaysById() {
-        return daysById;
-    }
-
-    public void setDaysById(Collection<DaysEntity> daysById) {
-        this.daysById = daysById;
+    @Override
+    public String toString() {
+        return name +
+                " " + surname;
     }
 
     @ManyToOne

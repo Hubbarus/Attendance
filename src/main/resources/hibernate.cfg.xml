@@ -6,19 +6,21 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:8889/attendanceDB?serverTimezone=UTC</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
 
-        <mapping class="com.paul.attendance.entity.DaysEntity"/>
-        <mapping resource="DaysEntity.hbm.xml"/>
         <mapping class="com.paul.attendance.entity.DepartmentsEntity"/>
         <mapping resource="DepartmentsEntity.hbm.xml"/>
-        <mapping class="com.paul.attendance.entity.TagsEntity"/>
-        <mapping resource="TagsEntity.hbm.xml"/>
-        <mapping resource="WorkersEntity.hbm.xml"/>
-        <mapping class="com.paul.attendance.entity.WorkersEntity"/>
+        <mapping class="com.paul.attendance.entity.EmployeeEntity"/>
+        <mapping resource="EmployeeEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.ScheduleEntity"/>
+        <mapping resource="ScheduleEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.DepartmentsEntity"/>
+        <mapping resource="DepartmentsEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.EmployeeEntity"/>
+        <mapping resource="EmployeeEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.ScheduleEntity"/>
+        <mapping resource="ScheduleEntity.hbm.xml"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
