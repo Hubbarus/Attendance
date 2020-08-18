@@ -14,17 +14,14 @@
         <property name="name">
             <column name="name" sql-type="text"/>
         </property>
-        <property name="surname">
-            <column name="surname" sql-type="text"/>
+        <property name="lastname">
+            <column name="lastname" sql-type="text"/>
         </property>
         <property name="birth">
             <column name="birth" sql-type="date"/>
         </property>
-        <property name="age">
-            <column name="age" sql-type="int(11)"/>
-        </property>
-        <property name="profession">
-            <column name="profession" sql-type="text"/>
+        <property name="position">
+            <column name="position" sql-type="text"/>
         </property>
         <property name="remote">
             <column name="remote" sql-type="tinyint(1)"/>

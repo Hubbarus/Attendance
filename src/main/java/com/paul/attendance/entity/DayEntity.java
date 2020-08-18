@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Schedule", schema = "attendanceDB", catalog = "")
-public class ScheduleEntity {
+@Table(name = "Day", schema = "attendanceDB", catalog = "")
+public class DayEntity {
     private int id;
     private Date date;
-    private String tag;
+    private String event;
     private EmployeeEntity employeeByEmployee;
 
     @Id
@@ -32,13 +32,13 @@ public class ScheduleEntity {
     }
 
     @Basic
-    @Column(name = "tag", nullable = false, length = -1)
-    public String getTag() {
-        return tag;
+    @Column(name = "event", nullable = false, length = -1)
+    public String getEvent() {
+        return event;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setEvent(String tag) {
+        this.event = tag;
     }
 
     @Override
@@ -46,11 +46,11 @@ public class ScheduleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ScheduleEntity that = (ScheduleEntity) o;
+        DayEntity that = (DayEntity) o;
 
         if (id != that.id) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (tag != null ? !tag.equals(that.tag) : that.tag != null) return false;
+        if (event != null ? !event.equals(that.event) : that.event != null) return false;
 
         return true;
     }
@@ -59,7 +59,7 @@ public class ScheduleEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (tag != null ? tag.hashCode() : 0);
+        result = 31 * result + (event != null ? event.hashCode() : 0);
         return result;
     }
 

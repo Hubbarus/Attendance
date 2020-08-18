@@ -9,10 +9,9 @@ public class EmployeeEntity {
     private int id;
     private String photo;
     private String name;
-    private String surname;
+    private String lastname;
     private Date birth;
-    private int age;
-    private String profession;
+    private String position;
     private boolean remote;
     private String address;
     private DepartmentsEntity departmentsByDepartment;
@@ -48,13 +47,13 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "surname", nullable = false, length = -1)
-    public String getSurname() {
-        return surname;
+    @Column(name = "lastname", nullable = false, length = -1)
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastname(String surname) {
+        this.lastname = surname;
     }
 
     @Basic
@@ -68,23 +67,13 @@ public class EmployeeEntity {
     }
 
     @Basic
-    @Column(name = "age", nullable = false)
-    public int getAge() {
-        return age;
+    @Column(name = "position", nullable = false, length = -1)
+    public String getPosition() {
+        return position;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Basic
-    @Column(name = "profession", nullable = false, length = -1)
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
+    public void setPosition(String profession) {
+        this.position = profession;
     }
 
     @Basic
@@ -115,13 +104,12 @@ public class EmployeeEntity {
         EmployeeEntity that = (EmployeeEntity) o;
 
         if (id != that.id) return false;
-        if (age != that.age) return false;
         if (remote != that.remote) return false;
         if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
         if (birth != null ? !birth.equals(that.birth) : that.birth != null) return false;
-        if (profession != null ? !profession.equals(that.profession) : that.profession != null) return false;
+        if (position != null ? !position.equals(that.position) : that.position != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
 
         return true;
@@ -132,10 +120,9 @@ public class EmployeeEntity {
         int result = id;
         result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (birth != null ? birth.hashCode() : 0);
-        result = 31 * result + age;
-        result = 31 * result + (profession != null ? profession.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
     }
@@ -143,7 +130,7 @@ public class EmployeeEntity {
     @Override
     public String toString() {
         return name +
-                " " + surname;
+                " " + lastname;
     }
 
     @ManyToOne

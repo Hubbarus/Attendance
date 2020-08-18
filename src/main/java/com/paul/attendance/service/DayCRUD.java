@@ -1,6 +1,6 @@
 package com.paul.attendance.service;
 
-import com.paul.attendance.entity.ScheduleEntity;
+import com.paul.attendance.entity.DayEntity;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +10,9 @@ import java.time.format.TextStyle;
 import java.util.*;
 
 @Component
-public class ScheduleCRUD {
+public class DayCRUD {
 
-    public void save(ScheduleEntity day) {
+    public void save(DayEntity day) {
         Session session = HibernateUtil.getSession(); //открываем сессию
         session.beginTransaction();
         session.save(day); //пользуемся ее методами
@@ -20,7 +20,7 @@ public class ScheduleCRUD {
         session.close();
     }
 
-    public void delete(ScheduleEntity day) {
+    public void delete(DayEntity day) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         session.delete(day);
@@ -28,7 +28,7 @@ public class ScheduleCRUD {
         session.close();
     }
 
-    public void update(ScheduleEntity schedule) {
+    public void update(DayEntity schedule) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         session.update(schedule);
@@ -36,17 +36,17 @@ public class ScheduleCRUD {
         session.close();
     }
 
-    public List<ScheduleEntity> getAll() {
+    public List<DayEntity> getAll() {
         Session session = HibernateUtil.getSession();
-        return session.createCriteria(ScheduleEntity.class).list();
+        return session.createCriteria(DayEntity.class).list();
     }
 
-    public ScheduleEntity getByDate(String str) {
+    public DayEntity getByDate(String str) {
         Date date = Date.valueOf(str);
-        List<ScheduleEntity> list = getAll();
-        ScheduleEntity resultEntity = null;
+        List<DayEntity> list = getAll();
+        DayEntity resultEntity = null;
 
-        for (ScheduleEntity entity : list) {
+        for (DayEntity entity : list) {
             if (entity.getDate().equals(date)) {
                 resultEntity = entity;
             }

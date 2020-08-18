@@ -2,10 +2,10 @@ package com.paul.attendance.controllers;
 
 import com.paul.attendance.entity.DepartmentsEntity;
 import com.paul.attendance.entity.EmployeeEntity;
-import com.paul.attendance.entity.ScheduleEntity;
+import com.paul.attendance.entity.DayEntity;
 import com.paul.attendance.service.DepartmentsCRUD;
 import com.paul.attendance.service.EmployeeCRUD;
-import com.paul.attendance.service.ScheduleCRUD;
+import com.paul.attendance.service.DayCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ public class MainController {
     @Autowired
     private DepartmentsCRUD departmentsCRUD;
     @Autowired
-    private ScheduleCRUD scheduleCRUD;
+    private DayCRUD dayCRUD;
 
     @GetMapping("/")
     public String home() {
@@ -42,10 +42,10 @@ public class MainController {
             }
         });
 
-        List<ScheduleEntity> cols = scheduleCRUD.getAll();
+        List<DayEntity> cols = dayCRUD.getAll();
         Collections.sort(cols, new Comparator<>() {
             @Override
-            public int compare(ScheduleEntity o1, ScheduleEntity o2) {
+            public int compare(DayEntity o1, DayEntity o2) {
                 return o1.getEmployeeByEmployee().getName().compareTo(o2.getEmployeeByEmployee().getName());
             }
         });

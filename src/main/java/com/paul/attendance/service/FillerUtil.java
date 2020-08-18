@@ -1,18 +1,16 @@
 package com.paul.attendance.service;
 
 import com.paul.attendance.entity.*;
-import org.hibernate.Session;
 
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 
 public abstract class FillerUtil {
 
     private static EmployeeCRUD employeeCrud = new EmployeeCRUD();
     private static DepartmentsCRUD departmentsCrud = new DepartmentsCRUD();
-    private static ScheduleCRUD scheduleCRUD = new ScheduleCRUD();
+    private static DayCRUD dayCRUD = new DayCRUD();
     /*public static void fillOneMonth() {
         if (!isFilled()) {
             List<DaysEntity> listOfDaysInDb = daysCRUD.getAll();
@@ -51,22 +49,20 @@ public abstract class FillerUtil {
 
         EmployeeEntity w1 = new EmployeeEntity();
         w1.setName("Vladimir");
-        w1.setSurname("Kashin");
+        w1.setLastname("Kashin");
         w1.setBirth(Date.valueOf("1982-08-01"));
         w1.setAddress("Moscow");
-        w1.setAge(35);
-        w1.setProfession("Kotlin Developer");
+        w1.setPosition("Kotlin Developer");
         w1.setRemote(true);
         w1.setPhoto("photo7.jpg");
         w1.setDepartmentsByDepartment(departmentsCrud.getByName("HR"));
 
         EmployeeEntity w2 = new EmployeeEntity();
         w2.setName("Eugeniy");
-        w2.setSurname("Romanov");
+        w2.setLastname("Romanov");
         w2.setBirth(Date.valueOf("1984-07-22"));
         w2.setAddress("Kiev");
-        w2.setAge(44);
-        w2.setProfession("Manager");
+        w2.setPosition("Manager");
         w2.setRemote(true);
         w2.setPhoto("photo99.jpg");
         w2.setDepartmentsByDepartment(departmentsCrud.getByName("Bookkeeping"));
@@ -97,12 +93,12 @@ public abstract class FillerUtil {
             EmployeeEntity currentEmployee = employeeEntities.get(i);
 
             while (cal.before(tmp)) {
-                ScheduleEntity entity = new ScheduleEntity();
+                DayEntity entity = new DayEntity();
                 Date date = new Date(cal.getTime().getTime());
                 entity.setDate(date);
                 entity.setEmployeeByEmployee(currentEmployee);
-                entity.setTag(TagsType.DAY_OFF.getCode());
-                scheduleCRUD.save(entity);
+                entity.setEvent(TagsType.DAY_OFF.getCode());
+                dayCRUD.save(entity);
                 cal.add(Calendar.DATE, 1);
             }
 

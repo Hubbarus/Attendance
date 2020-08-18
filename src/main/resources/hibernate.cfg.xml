@@ -13,14 +13,14 @@
         <mapping resource="DepartmentsEntity.hbm.xml"/>
         <mapping class="com.paul.attendance.entity.EmployeeEntity"/>
         <mapping resource="EmployeeEntity.hbm.xml"/>
-        <mapping class="com.paul.attendance.entity.ScheduleEntity"/>
-        <mapping resource="ScheduleEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.DayEntity"/>
+        <mapping resource="DayEntity.hbm.xml"/>
         <mapping class="com.paul.attendance.entity.DepartmentsEntity"/>
         <mapping resource="DepartmentsEntity.hbm.xml"/>
         <mapping class="com.paul.attendance.entity.EmployeeEntity"/>
         <mapping resource="EmployeeEntity.hbm.xml"/>
-        <mapping class="com.paul.attendance.entity.ScheduleEntity"/>
-        <mapping resource="ScheduleEntity.hbm.xml"/>
+        <mapping class="com.paul.attendance.entity.DayEntity"/>
+        <mapping resource="DayEntity.hbm.xml"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

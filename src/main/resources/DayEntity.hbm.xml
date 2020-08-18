@@ -4,15 +4,15 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.paul.attendance.entity.ScheduleEntity" table="Schedule" schema="attendanceDB">
+    <class name="com.paul.attendance.entity.DayEntity" table="Day" schema="attendanceDB">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
         </id>
         <property name="date">
             <column name="date" sql-type="date"/>
         </property>
-        <property name="tag">
-            <column name="tag" sql-type="text"/>
+        <property name="event">
+            <column name="event" sql-type="text"/>
         </property>
         <many-to-one name="employeeByEmployee" class="com.paul.attendance.entity.EmployeeEntity">
             <column name="employee"/>
