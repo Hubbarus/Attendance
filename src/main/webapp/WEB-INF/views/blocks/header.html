@@ -3,7 +3,7 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Attendance Project 19210</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/">Main</a>
-            <a class="p-2 text-dark" href="/dpt?deptId=1">View Table</a>
+            <a class="p-2 text-dark" th:href="@{'/dpt?deptId=1&month=' + ${T(org.thymeleaf.util.DateUtils).monthName(#dates.createNow(), #locale.ENGLISH)}}">View Table</a>
             <a class="p-2 text-dark" href="#">About</a>
             <a class="p-2 text-dark" href="#">Log In</a>
         </nav>

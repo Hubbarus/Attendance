@@ -16,29 +16,31 @@
             <th>Attendance List</th>
         </tr>
         <tr>
-            <th>
+            <td>
+<!--                Departments Block-->
                 <div th:insert = "blocks/dpts :: dpts"></div>
-            </th>
-            <th>
+            </td>
+            <td>
+                <div th:insert = "blocks/months :: months"></div>
                 <table border="1">
                     <tr>
                         <th>
                             <a>Dates | Names</a><br>
                         </th>
-                        <th th:each="el : ${cols}">
-                            <a th:text="${el.date}"></a>
+                        <th th:each="day : ${events.values()[0]}">
+                            <a th:text="${#dates.day(day.date)}"></a>
                         </th>
                     </tr>
-                    <tr th:each="el : ${employees}">
-                        <th>
-                            <a th:text="${el}"></a>
-                        </th>
-                        <th th:each="el : ${cols}">
-                            <a th:text="${el.tag}"></a>
-                        </th>
+                    <tr th:each="empl : ${events}">
+                        <td>
+                            <a th:text="${empl.key}"></a>
+                        </td>
+                        <td th:each="ev : ${empl.value}">
+                            <a th:text="${ev.event}"></a>
+                        </td>
                     </tr>
                 </table>
-            </th>
+            </td>
         </tr>
     </table>
 

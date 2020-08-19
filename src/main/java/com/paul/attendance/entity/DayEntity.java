@@ -1,5 +1,7 @@
 package com.paul.attendance.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -7,6 +9,7 @@ import java.sql.Date;
 @Table(name = "Day", schema = "attendanceDB", catalog = "")
 public class DayEntity {
     private int id;
+    //@DateTimeFormat(pattern = "MM")
     private Date date;
     private String event;
     private EmployeeEntity employeeByEmployee;

@@ -1,6 +1,7 @@
 package com.paul.attendance.service;
 
 import com.paul.attendance.entity.DayEntity;
+import com.paul.attendance.entity.EmployeeEntity;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
@@ -28,29 +29,63 @@ public class DayCRUD {
         session.close();
     }
 
-    public void update(DayEntity schedule) {
+    public void update(DayEntity day) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        session.update(schedule);
+        session.update(day);
         session.flush();
         session.close();
     }
 
     public List<DayEntity> getAll() {
         Session session = HibernateUtil.getSession();
-        return session.createCriteria(DayEntity.class).list();
+        List<DayEntity> result = session.createCriteria(DayEntity.class).list();
+        //session.close();
+        return result;
     }
 
-    public DayEntity getByDate(String str) {
-        Date date = Date.valueOf(str);
-        List<DayEntity> list = getAll();
+    public List<DayEntity> getByMonth(String month) {
+        List<DayEntity> allDays = getAll();
+        List<DayEntity> resultList = new LinkedList<>();
+
+        for (DayEntity currentDay : allDays) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(currentDay.getDate());
+            String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH).toUpperCase();
+            if (month.toUpperCase().equals(monthName)) {
+                resultList.add(currentDay);
+            }
+        }
+
+        return resultList;
+    }
+
+    public List<DayEntity> getListByEmployee(EmployeeEntity employee) {
+        List<DayEntity> days = getAll();
+        List<DayEntity> resultList = new LinkedList<>();
+
+        for (DayEntity day : days) {
+            if (day.getEmployeeByEmployee().equals(employee)) {
+                resultList.add(day);
+            }
+        }
+
+        return resultList;
+    }
+
+    public DayEntity getByDateAndEmployee(EmployeeEntity employee, String inputDate) {
+        Date date = Date.valueOf(inputDate);
+        List<DayEntity> entities = getListByEmployee(employee);
         DayEntity resultEntity = null;
 
-        for (DayEntity entity : list) {
+        for (DayEntity entity : entities) {
             if (entity.getDate().equals(date)) {
                 resultEntity = entity;
             }
         }
+
+        if (resultEntity == null) throw new NoSuchElementException();
+
         return resultEntity;
     }
 
@@ -69,4 +104,29 @@ public class DayCRUD {
         return result;
     }
 
+    public LinkedList<String> getEventsByEmployee(EmployeeEntity employee) {
+        LinkedList<String> resultList = new LinkedList<>();
+        List<DayEntity> allDays = getAll();
+
+        for (DayEntity currentDay : allDays) {
+            if (currentDay.getEmployeeByEmployee().equals(employee)) {
+                resultList.add(currentDay.getEvent());
+            }
+        }
+
+        return resultList;
+    }
+
+    public LinkedList<DayEntity> getEventsByEmployeeAndMonth(EmployeeEntity employee, String month) {
+        LinkedList<DayEntity> resultList = new LinkedList<>();
+        List<DayEntity> allDays = getByMonth(month);
+
+        for (DayEntity day : allDays) {
+            if (day.getEmployeeByEmployee().equals(employee)) {
+                resultList.add(day);
+            }
+        }
+
+        return resultList;
+    }
 }

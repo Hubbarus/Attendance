@@ -40,7 +40,9 @@ public class EmployeeCRUD {
 
     public EmployeeEntity getById(Integer id) {
         Session session = HibernateUtil.getSession();
-        EmployeeEntity workers = session.get(EmployeeEntity.class, id);
-        return workers;
+        EmployeeEntity employee = session.get(EmployeeEntity.class, id);
+        session.close();
+        return employee;
     }
+
 }

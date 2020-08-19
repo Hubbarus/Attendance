@@ -1,8 +1,8 @@
 package com.paul.attendance.controllers;
 
+import com.paul.attendance.entity.DayEntity;
 import com.paul.attendance.entity.DepartmentsEntity;
 import com.paul.attendance.entity.EmployeeEntity;
-import com.paul.attendance.entity.DayEntity;
 import com.paul.attendance.service.DepartmentsCRUD;
 import com.paul.attendance.service.EmployeeCRUD;
 import com.paul.attendance.service.DayCRUD;
@@ -30,11 +30,12 @@ public class MainController {
     }
 
     @GetMapping("/dpt")
-    public String dpt(Model model, @RequestParam int deptId) {
+    public String dpt(Model model, @RequestParam int deptId, @RequestParam String month) {
         List<DepartmentsEntity> departments = departmentsCRUD.getAll();
 
         DepartmentsEntity dep = departmentsCRUD.getById(deptId);
         List<EmployeeEntity> employees = new ArrayList<>(dep.getEmployeesById());
+
         Collections.sort(employees, new Comparator<EmployeeEntity>() {
             @Override
             public int compare(EmployeeEntity o1, EmployeeEntity o2) {
@@ -42,17 +43,19 @@ public class MainController {
             }
         });
 
-        List<DayEntity> cols = dayCRUD.getAll();
-        Collections.sort(cols, new Comparator<>() {
-            @Override
-            public int compare(DayEntity o1, DayEntity o2) {
-                return o1.getEmployeeByEmployee().getName().compareTo(o2.getEmployeeByEmployee().getName());
-            }
-        });
+        LinkedHashMap<EmployeeEntity, LinkedList<DayEntity>> employeeEventMap = new LinkedHashMap<>();
 
+        for (EmployeeEntity employee : employees) {
+            employeeEventMap.put(employee, dayCRUD.getEventsByEmployeeAndMonth(employee, month));
+        }
+
+        List<DayEntity> days = dayCRUD.getByMonth(month);
+
+        model.addAttribute("days", days);
         model.addAttribute("departments", departments);
-        model.addAttribute("employees", employees);
-        model.addAttribute("cols", cols);
+        model.addAttribute("events", employeeEventMap);
+        model.addAttribute("currentMonth", month);
+        model.addAttribute("departmentId", deptId);
         return "dpt";
     }
 
