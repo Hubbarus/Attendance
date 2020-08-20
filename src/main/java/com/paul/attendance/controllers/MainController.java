@@ -9,6 +9,7 @@ import com.paul.attendance.service.DayCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,7 +55,7 @@ public class MainController {
         model.addAttribute("days", days);
         model.addAttribute("departments", departments);
         model.addAttribute("events", employeeEventMap);
-        model.addAttribute("currentMonth", month);
+        model.addAttribute("currentMonth", StringUtils.capitalize(month));
         model.addAttribute("departmentId", deptId);
         return "dpt";
     }

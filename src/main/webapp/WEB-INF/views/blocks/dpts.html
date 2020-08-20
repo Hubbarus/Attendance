@@ -1,3 +1,5 @@
-<div th:fragment = "dpts" th:each = "el : ${departments}" class="alert alert-info mt-2">
-    <a th:href="@{'dpt?deptId=' + ${el.id} + '&month=' + ${currentMonth}}"><h5 th:text = "${el.name}"></h5></a>
+<div th:fragment = "dpts" th:each = "el : ${departments}">
+    <a th:href="@{'dpt?deptId=' + ${el.id} + '&month=' + ${currentMonth}}">
+        <h6 th:text = "${el.name}" class="alert alert-primary"></h6>
+    </a>
 </div>

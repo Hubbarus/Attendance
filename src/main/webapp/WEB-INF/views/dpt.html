@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Attendance Table</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header th:insert="blocks/header :: header"></header>
 
-<header th:insert="blocks/header :: header"></header>
-
-<div>
-    <table border="1">
+    <div>
+      <table class="table">
         <tr>
-            <th>Department</th>
-            <th>Attendance List</th>
+          <th>Department</th>
+          <th>Attendance List</th>
         </tr>
         <tr>
-            <td>
-<!--                Departments Block-->
-                <div th:insert = "blocks/dpts :: dpts"></div>
-            </td>
-            <td>
-                <div th:insert = "blocks/months :: months"></div>
-                <table border="1">
-                    <tr>
-                        <th>
-                            <a>Dates | Names</a><br>
-                        </th>
-                        <th th:each="day : ${events.values()[0]}">
-                            <a th:text="${#dates.day(day.date)}"></a>
-                        </th>
-                    </tr>
-                    <tr th:each="empl : ${events}">
-                        <td>
-                            <a th:text="${empl.key}"></a>
-                        </td>
-                        <td th:each="ev : ${empl.value}">
-                            <a th:text="${ev.event}"></a>
-                        </td>
-                    </tr>
-                </table>
-            </td>
+          <td>
+            <!--                Departments Block-->
+            <div th:insert="blocks/dpts :: dpts"></div>
+          </td>
+          <td>
+            <div>
+              <h1 th:text="${currentMonth}"></h1>
+            </div>
+            <table class="table">
+              <tr>
+                <div th:insert="blocks/months :: months"></div><br>
+              </tr>
+              <tr>
+                <th class="table-active"><a>Names | Dates</a><br /></th>
+                <span th:each="day : ${events.values()[0]}">
+                  <span
+                    th:if="${#dates.dayOfWeek(day.date) == 1 || #dates.dayOfWeek(day.date) == 7}"
+                  >
+                    <th class="table-danger" scope="colgroup">
+                      <a th:text="${#dates.day(day.date)}"></a>
+                    </th>
+                  </span>
+                  <span
+                    th:unless="${#dates.dayOfWeek(day.date) == 1 || #dates.dayOfWeek(day.date) == 7}"
+                  >
+                    <th class="table-active" scope="colgroup">
+                      <a th:text="${#dates.day(day.date)}"></a>
+                    </th>
+                  </span>
+                </span>
+              </tr>
+              <tr th:each="empl : ${events}">
+                <td>
+                  <a th:text="${empl.key}"></a>
+                </td>
+                <td th:each="ev : ${empl.value}">
+                  <a th:text="${ev.event}"></a>
+                </td>
+              </tr>
+            </table>
+          </td>
         </tr>
-    </table>
+      </table>
+    </div>
 
-</div>
-
-
-<footer th:insert="blocks/footer :: footer"></footer>
-
-</body>
+    <footer th:insert="blocks/footer :: footer"></footer>
+  </body>
 </html>

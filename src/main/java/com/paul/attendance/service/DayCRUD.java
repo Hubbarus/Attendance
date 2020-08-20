@@ -4,7 +4,11 @@ import com.paul.attendance.entity.DayEntity;
 import com.paul.attendance.entity.EmployeeEntity;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.time.Month;
 import java.time.format.TextStyle;
@@ -39,9 +43,12 @@ public class DayCRUD {
 
     public List<DayEntity> getAll() {
         Session session = HibernateUtil.getSession();
-        List<DayEntity> result = session.createCriteria(DayEntity.class).list();
-        //session.close();
-        return result;
+        CriteriaQuery<DayEntity> cq = session.getCriteriaBuilder().createQuery(DayEntity.class);
+        Root<DayEntity> rootEntry = cq.from(DayEntity.class);
+        CriteriaQuery<DayEntity> all = cq.select(rootEntry);
+
+        TypedQuery<DayEntity> allQuery = session.createQuery(all);
+        return allQuery.getResultList();
     }
 
     public List<DayEntity> getByMonth(String month) {

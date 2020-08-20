@@ -1,38 +1,14 @@
 <div th:fragment="months">
-    <form action="">
-        <button type="submit" class="btn btn-success">Январь</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Февраль</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Март</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Апрель</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Май</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Июнь</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Июль</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Август</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Сентябрь</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Октябрь</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Ноябрь</button>
-    </form>
-    <form action="">
-        <button type="submit" class="btn btn-success">Декабрь</button>
-    </form>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=january'" type="submit" class="btn btn-outline-info">January</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=february'" type="submit" class="btn btn-outline-info">February</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=march'" type="submit" class="btn btn-outline-info">March</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=april'" type="submit" class="btn btn btn-outline-info">April</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=may'" type="submit" class="btn btn btn-outline-info">May</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=june'" type="submit" class="btn btn btn-outline-info">June</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=july'" type="submit" class="btn btn btn-outline-info">July</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=august'" type="submit" class="btn btn btn-outline-info">August</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=september'" type="submit" class="btn btn btn-outline-info">September</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=october'" type="submit" class="btn btn btn-outline-info">October</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=november'" type="submit" class="btn btn btn-outline-info">November</a>
+    <a th:href="'dpt?deptId=' + ${departmentId} + '&month=december'" type="submit" class="btn btn btn-outline-info">December</a>
 </div>
